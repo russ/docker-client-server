@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  client:
+    build: ./client
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./client:/data
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8080
+      - API_URL=http://localhost:5020/
+    depends_on:
+      - server
+
+  server:
+    build: ./server
+    volumes:
+      - ./server:/data
+    ports:
+      - "5020:5020"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=5020
+
